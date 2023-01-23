@@ -3,7 +3,8 @@ describe('The Login Page', () => {
       cy.login()
     })
 
-    it('visitsanotherpage', () => {
+// checks session
+    it('Moves to inbox', () => {
         cy.visit('app/project/2306473783')
     })
 })
