@@ -1,7 +1,7 @@
 describe('Homepage', () => {
 
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/pl')
   })
 
   it('Successfully loads', () => {
