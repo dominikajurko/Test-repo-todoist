@@ -1,15 +1,10 @@
 describe('The Login Page', () => {
-    // beforeEach(() => {
-    //     cy.visit('/')
-    // })
-
     it('Successfully logs in', () => {
         cy.login('dominika.roszak00+test@gmail.com', 'Kurwamac8')
         cy.visit('app/today')
         cy.get('#\\:r2\\:').click()
         cy.get('.user_menu_email').should('contain', 'dominika.roszak00+test@gmail.com')
-})
-
+    })
     it('Login fails - wrong username', () => {
         cy.visit('pl/')
         cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(5).click()
@@ -18,6 +13,41 @@ describe('The Login Page', () => {
         cy.get('#element-3').type('Kurwamac8')
         cy.get('button[type=submit]').click()
         cy.contains('Niepoprawny e-mail lub hasło.')
-})
-
+    })
+    it('Login fails - wrong password', () => {
+        cy.visit('pl/')
+        cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(5).click()
+        .url().should('contain' , '/auth/login')
+        cy.get('#element-0').type('dominika.roszak00+test@gmail.com')
+        cy.get('#element-3').type('WrongPassword')
+        cy.get('button[type=submit]').click()
+        cy.contains('Niepoprawny e-mail lub hasło.')
+    })
+    it('Login fails - email in wrong format', () => {
+        cy.visit('pl/')
+        cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(5).click()
+        .url().should('contain' , '/auth/login')
+        cy.get('#element-0').type('dominika.roszak00+test@gmail')
+        cy.get('#element-3').type('Kurwamac8')
+        cy.get('button[type=submit]').click()
+        cy.contains('Wprowadź poprawny adres e-mail.')
+    })
+    it('Login fails - email characters within the limit', () => {
+        // the limit for email characters is 64@67, this is an edge case
+        cy.visit('pl/')
+        cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(5).click()
+        .url().should('contain' , '/auth/login')
+        cy.get('#element-0').type('dominika.roszak00+test123456789012345678901234567890123456789012@gmailgmailgmailgmailgmailgmailgmailgmailgmailgmailgmailgmailgma.com')
+        cy.get('#element-3').type('Kurwamac8')
+        cy.get('button[type=submit]').click()
+        cy.contains('Niepoprawny e-mail lub hasło.')
+    })
+    it('Login fails - no password', () => {
+        cy.visit('pl/')
+        cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(5).click()
+        .url().should('contain' , '/auth/login')
+        cy.get('#element-0').type('dominika.roszak00+test@gmail.com')
+        cy.get('button[type=submit]').click()
+        cy.contains('Hasło musi zawierać co najmniej 8 znaków.')
+    })
 })

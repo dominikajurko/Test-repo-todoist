@@ -12,6 +12,7 @@ module.exports = defineConfig({
     experimentalSessionAndOrigin: true,
     experimentalSessionSupport:true,
     chromeWebSecurity: false,
+    defaultCommandTimeout: 30000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

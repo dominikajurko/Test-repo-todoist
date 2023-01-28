@@ -6,6 +6,7 @@ Cypress.Commands.add('login', (username, password) => {
         cy.get('#element-0').type(username)
         cy.get('#element-3').type(password)
         cy.get('button[type=submit]').click()
+        cy.url().should('eq', 'https://todoist.com/app/today')
         cy.url().should('include', 'app/today')
       })
     })
