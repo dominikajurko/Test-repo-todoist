@@ -11,7 +11,7 @@ describe('Homepage', () => {
   it('Contains menu elements', () => {
     cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(0)
       .should('be.visible')
-      .contains('Funkcje')
+      .contains('Funkcj')
 
     cy.get('.hGJuHEzyrDQU5nwls2PW>li').eq(1)
       .should('be.visible')
